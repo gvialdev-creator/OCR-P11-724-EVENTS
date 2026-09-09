@@ -35,10 +35,11 @@ describe("When slider is created", () => {
         <Slider />
       </DataProvider>
     );
-    await screen.findByText("World economic forum");
-    await screen.findByText("janvier");
-    await screen.findByText(
-      "Oeuvre à la coopération entre le secteur public et le privé."
-    );
+    const titles = await screen.findAllByRole("heading", { level: 3 });
+    const expectedTitles = [...data.focus]
+      .sort((eventA, eventB) => new Date(eventB.date) - new Date(eventA.date))
+      .map((event) => event.title);
+
+    expect(titles.map((title) => title.textContent)).toEqual(expectedTitles);
   });
 });
