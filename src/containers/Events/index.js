@@ -16,7 +16,7 @@ const EventList = () => {
   const filteredEvents = (
     (!type
       ? data?.events
-      : data?.events.filter((event) => event.type === type)) || []
+      : data?.events?.filter((event) => event.type === type)) || []
   ).filter((_, index) => {
     if (
       (currentPage - 1) * PER_PAGE <= index &&
@@ -31,7 +31,7 @@ const EventList = () => {
     setType(evtType);
   };
   const pageNumber = Math.floor((filteredEvents?.length || 0) / PER_PAGE) + 1;
-  const typeList = new Set(data?.events.map((event) => event.type));
+  const typeList = new Set(data?.events?.map((event) => event.type));
   return (
     <>
       {error && <div>An error occured</div>}
