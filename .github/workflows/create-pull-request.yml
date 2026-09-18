@@ -1,0 +1,26 @@
+name: Creer une Pull Request
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  create-pull-request:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Recuperer le code
+        uses: actions/checkout@v4
+
+      - name: Creer ou mettre a jour la Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          base: main
+          title: "Mise à jour automatique"
+          body: "Pull Request créée automatiquement après un push."
+          delete-branch: false
