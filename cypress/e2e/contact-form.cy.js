@@ -18,5 +18,6 @@ describe("Contact form", () => {
     });
 
     cy.contains("Message envoyé !").should("be.visible");
+    //cy.contains("helloFail").should("be.visible");
   });
 });
