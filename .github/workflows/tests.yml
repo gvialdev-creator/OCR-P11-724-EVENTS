@@ -1,0 +1,43 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: dev-react-p11
+
+    steps:
+      - name: Recuperer le code
+        uses: actions/checkout@v4
+
+      - name: Installer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: yarn
+          cache-dependency-path: dev-react-p11/yarn.lock
+
+      - name: Installer les dependances
+        run: yarn install --frozen-lockfile
+
+      - name: Executer les tests unitaires
+        run: yarn test:unit
+
+      - name: Construire l application
+        run: yarn build
+
+      - name: Executer les tests Cypress
+        uses: cypress-io/github-action@v6
+        with:
+          working-directory: dev-react-p11
+          install: false
+          start: yarn serve -s build -l 3000
+          wait-on: http://localhost:3000
+          browser: chrome
