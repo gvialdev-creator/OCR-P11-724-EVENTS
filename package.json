@@ -21,7 +21,11 @@
     "lint": "eslint .eslintrc.js ./src",
     "format": "prettier ./src --write",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run"
+    "cypress:run": "cypress run",
+    "test:unit": "react-scripts test --watchAll=false --runInBand",
+    "test:e2e": "start-server-and-test \"yarn build && serve -s build -l 3000\" http://localhost:3000 cypress:run",
+    "verify": "yarn test:unit && yarn test:e2e",
+    "vercel-build": "yarn test:unit && yarn build"
   },
   "eslintConfig": {
     "extends": [
@@ -50,6 +54,8 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.5.0",
-    "prettier": "^2.6.2"
+    "prettier": "^2.6.2",
+    "serve": "^14.2.6",
+    "start-server-and-test": "^3.0.12"
   }
 }
