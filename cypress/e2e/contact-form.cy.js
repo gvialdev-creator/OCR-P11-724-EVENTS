@@ -17,7 +17,7 @@ describe("Contact form", () => {
       cy.get('[data-testid="button-test-id"]').click();
     });
 
-    // cy.contains("Message envoyé !").should("be.visible");
-    cy.contains("helloFail").should("be.visible");
+    cy.contains("Message envoyé !").should("be.visible");
+    //cy.contains("helloFail").should("be.visible");
   });
 });
