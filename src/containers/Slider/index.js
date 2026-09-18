@@ -9,7 +9,7 @@ const Slider = () => {
   const [index, setIndex] = useState(0);
   const byDateDesc = data?.focus
     ? [...data.focus].sort(
-        (evtA, evtB) => new Date(evtA.date) - new Date(evtB.date)
+        (evtA, evtB) => new Date(evtB.date) - new Date(evtA.date)
       )
     : [];
   const nextCard = () => {
